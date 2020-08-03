@@ -43,10 +43,10 @@ export default class extends React.PureComponent {
         let collapsible = toType(collapseStringsAfterLength) === 'integer';
         let style = { cursor: 'default' };
 
-        if (props.highlightSearch && value.toLowerCase().includes(props.highlightSearch.toLowerCase())) {
+        if (props.highlightSearch && `"${value}"`.toLowerCase().includes(props.highlightSearch.toLowerCase())) {
             return <div {...Theme(theme, 'string')}>
                 <DataTypeLabel type_name={type_name} {...props} />
-                "{splitAndPushByDelimiter(value, props.highlightSearch).map((word, i) => [
+                {splitAndPushByDelimiter(`"${value}"`, props.highlightSearch).map((word, i) => [
                     <span
                         key={i}
                         class="string-value"
@@ -55,7 +55,7 @@ export default class extends React.PureComponent {
                     >
                         {word}
                     </span>
-                ])}"
+                ])}
             </div>
         }
 
