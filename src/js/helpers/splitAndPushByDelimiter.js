@@ -1,4 +1,5 @@
 export default function split(value, delimiter) {
     if (!delimiter) return [value];
-    return value.split(new RegExp(`(${delimiter.toLowerCase()})`, 'gi'));
+    const escaped = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return value.split(new RegExp(`(${escaped})`, 'gi'));
 }
