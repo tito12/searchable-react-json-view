@@ -24,14 +24,14 @@ Name|Type|Default|Description
 <kbd><img src="https://user-images.githubusercontent.com/16322616/89118875-1d5b2080-d4b2-11ea-81fe-514d019cb26b.png" width="450" /></kbd>
 
 ### Custom actions & copy icon
-```
-    <JsonViewer
-        customCopiedIcon={<span>copied </span>}
-        customCopyIcon={<span>copy </span>}
-        customActions={[{
-            icon: <span> a</span>,
-            onClick: (value) => alert(JSON.stringify(value))
-        }]}
-    />
+```jsx
+<JsonViewer
+    customCopiedIcon={<span>Copied</span>}
+    customCopyIcon={<span>Copy</span>}
+    customActions={[{
+        icon: <span>A</span>,
+        onClick: (value) => alert(JSON.stringify(value))
+    }]}
+/>
 ```
 
