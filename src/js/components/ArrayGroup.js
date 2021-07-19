@@ -19,9 +19,39 @@ export default class extends React.PureComponent {
         };
     }
 
+    componentDidMount() {
+        this.updateExpandedGroups();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.highlightSearch !== this.props.highlightSearch) {
+            this.updateExpandedGroups();
+        }
+    }
+
+
+    updateExpandedGroups = () => {
+        const size = this.props.groupArraysAfterLength;
+        const groups = Math.ceil(this.props.src.length / size);
+        const expandedGroups = {};
+        for (let i in [...Array(groups)]) {
+            const groupSrc = this.props.src.slice(i * size, i * size + size)
+            const groupContainingSearch = this.props.highlightSearch && JSON.stringify(groupSrc).toLowerCase().includes(this.props.highlightSearch.toLowerCase());
+            if (groupContainingSearch) {
+                expandedGroups[i] = true;
+            }
+        }
+
+        this.setState({
+            ...this.state,
+            expanded: expandedGroups
+        });
+    }
+
     toggleCollapsed = (i) => {
         const groupState = !this.state.expanded[i];
         this.setState({
+            ...this.state,
             expanded: {
                 ...this.state.expanded,
                 [i]: groupState,
