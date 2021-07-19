@@ -15,18 +15,17 @@ export default class extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: []
+            expanded: {}
         };
     }
 
     toggleCollapsed = (i) => {
-        const newExpanded = [];
-        for (const j in this.state.expanded) {
-            newExpanded.push(this.state.expanded[j]);
-        }
-        newExpanded[i] = !newExpanded[i];
+        const groupState = !this.state.expanded[i];
         this.setState({
-            expanded: newExpanded
+            expanded: {
+                ...this.state.expanded,
+                [i]: groupState,
+            }
         });
     }
 
